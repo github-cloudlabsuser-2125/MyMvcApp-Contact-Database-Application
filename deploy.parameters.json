@@ -2,13 +2,13 @@ Mvc "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymen
   "contentVersion": "1.0.0.0",
   "parameters": {
     "appServicePlanName": {
-      "value": "Azure HOL 1118"
+      "value": "ASP-GitHubCopilotChallenges-ab54 (S1: 1)"
     },
     "webAppName": {
-      "value": "MyMvcApp"
+      "value": "MyMvcAppLJ"
     },
     "location": {
-      "value": "West US"
+      "value": "ASP-GitHubCopilotChallenges-ab54 (S1: 1)"
     }
   }
 }
