@@ -6,9 +6,24 @@
 
 <h2>Index</h2>
 
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Message"]
+    </div>
+}
+
 <p>
     @Html.ActionLink("Create New", "Create", "User")
 </p>
+
+<form method="get" asp-action="Index">
+    <p>
+        Find by name: <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" />
+        <input type="submit" value="Search" />
+    </p>
+</form>
+
 <table class="table">
     <tr>
         <th>

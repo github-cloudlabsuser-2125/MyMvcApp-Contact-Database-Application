@@ -9,9 +9,17 @@ public class UserController : Controller
     public static System.Collections.Generic.List<User> userlist = new System.Collections.Generic.List<User>();
 
     // GET: User
-    public ActionResult Index()
+    public ActionResult Index(string searchString)
     {
-        return View(userlist);
+        var users = from u in userlist
+                    select u;
+
+        if (!String.IsNullOrEmpty(searchString))
+        {
+            users = users.Where(s => s.Name.Contains(searchString, StringComparison.OrdinalIgnoreCase));
+        }
+
+        return View(users.ToList());
     }
 
     // GET: User/Details/5
@@ -38,6 +46,7 @@ public class UserController : Controller
         if (ModelState.IsValid)
         {
             userlist.Add(user);
+            TempData["Message"] = $"User '{user.Name}' was created successfully.";
             return RedirectToAction(nameof(Index));
         }
         return View(user);
@@ -70,6 +79,7 @@ public class UserController : Controller
             existingUser.Email = user.Email;
             // Update other properties as needed
 
+            TempData["Message"] = $"User '{user.Name}' was updated successfully.";
             return RedirectToAction(nameof(Index));
         }
         return View(user);
@@ -97,6 +107,7 @@ public class UserController : Controller
         }
 
         userlist.Remove(user);
+        TempData["Message"] = $"User '{user.Name}' was deleted successfully.";
         return RedirectToAction(nameof(Index));
     }
 }
